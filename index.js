@@ -1,13 +1,12 @@
+const http = require("http")
 
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.write(`<h1>Hello</h1>
+    <h2></h2>`)
+    res.end();
+})
 
-function calculate(x, y, callback) {
-    console.log("เริ่มต้นคำนวณ");
-    setTimeout(() => {
-        const sum = x + y
-        callback(sum)
-    }, 3000)
-}
-
-calculate(10, 5, function (result) {
-    console.log(`ผลบวก = ${result}`);
+server.listen(3000, () => {
+    console.log("start server");
 })
