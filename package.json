@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Suwit1100/Learn-Node/issues"
   },
-  "homepage": "https://github.com/Suwit1100/Learn-Node#readme"
+  "homepage": "https://github.com/Suwit1100/Learn-Node#readme",
+  "dependencies": {
+    "nodemon": "^3.1.1"
+  }
 }
