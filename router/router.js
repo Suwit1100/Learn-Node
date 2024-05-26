@@ -22,7 +22,7 @@ router.get("/product/:id", (req, res) => {
     } else if (productID === "3") {
         res.sendFile(product3page)
     } else {
-        res.send("NotFound" + productID)
+        res.redirect("/")
     }
 })
 
