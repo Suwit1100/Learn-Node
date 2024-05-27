@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Suwit1100/Learn-Node#readme",
   "dependencies": {
+    "ejs": "^3.1.10",
     "express": "^4.19.2",
     "nodemon": "^3.1.1"
   }
