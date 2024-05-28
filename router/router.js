@@ -3,6 +3,7 @@ const express = require("express")
 const path = require("path")
 const send = require("send")
 const router = express.Router()
+const Product = require('../models/product');
 
 
 const indexpage = path.join(__dirname, "../templates/index.html")
@@ -29,6 +30,10 @@ router.get("/product", (req, res) => {
 router.get("/edit_product", (req, res) => {
     res.render("editproduct")
 })
+
+router.post("/add_product", (req, res) => {
+    console.log(req.query);
+});
 
 router.get("/product/:id", (req, res) => {
     let productID = req.params.id
