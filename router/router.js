@@ -11,6 +11,14 @@ const product2page = path.join(__dirname, "../templates/product2.html")
 const product3page = path.join(__dirname, "../templates/product3.html")
 
 router.get("/", (req, res) => {
+    res.render("login")
+})
+
+router.get("/home", (req, res) => {
+    res.render("productlist")
+})
+
+router.get("/manage", (req, res) => {
     res.render("manage")
 })
 
