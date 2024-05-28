@@ -29,14 +29,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td scope="col"><a href="/edit_product" class="btn btn-warning">แก้ไข</a></td>
-                        <td scope="col"><a href="" class="btn btn-danger">ลบ</a></td>
-                    </tr>
+                    <% product.forEach(item=> { %>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td scope="col"><a href="/edit_product" class="btn btn-warning">แก้ไข</a></td>
+                            <td scope="col"><a href="/" class="btn btn-danger">ลบ</a></td>
+                        </tr>
+                        <% }); %>
                 </tbody>
             </table>
 
@@ -50,24 +52,28 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="">
+                            <form method="post" action="/add_product">
                                 <div class="row">
                                     <div class="col-12 my-2">
-                                        <input type="text" name="product" placeholder="ชื่อสินค้า" class="form-control">
+                                        <input type="text" name="name" placeholder="ชื่อสินค้า" class="form-control"
+                                            value="">
                                     </div>
                                     <div class="col-12 my-2">
-                                        <input type="number" name="price" placeholder="ราคา" class="form-control">
+                                        <input type="number" name="price" placeholder="ราคา" class="form-control"
+                                            value="">
                                     </div>
                                     <div class="col-12 my-2">
                                         <input type="text" name="description" placeholder="รายละเอียด"
-                                            class="form-control">
+                                            class="form-control" value="">
+                                    </div>
+                                    <div class="col-12 my-2">
+                                        <input type="file" name="image" class="form-control">
+                                    </div>
+                                    <div class="col-12 my-2">
+                                        <input type="submit" class="form-control btn btn-success">
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,8 @@
-const { render } = require("ejs")
 const express = require("express")
 const path = require("path")
-const send = require("send")
 const router = express.Router()
 const Product = require('../models/product');
+const multer = require('multer');
 
 
 const indexpage = path.join(__dirname, "../templates/index.html")
@@ -20,7 +19,11 @@ router.get("/home", (req, res) => {
 })
 
 router.get("/manage", (req, res) => {
-    res.render("manage")
+    // ดึงข้อมูลทั้งหมดจาก MongoDB
+    const data = Product.find()
+    res.render("manage", {
+        product: data
+    })
 })
 
 router.get("/product", (req, res) => {
@@ -31,9 +34,28 @@ router.get("/edit_product", (req, res) => {
     res.render("editproduct")
 })
 
+
+
 router.post("/add_product", (req, res) => {
-    console.log(req.query);
+    console.log(req.body);
+    const product = new Product({
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description
+    });
+    product.save();
+    res.redirect("manage")
 });
+
+router.post("/delete_product", (req, res) => {
+    // // ลบข้อมูลตามเงื่อนไขที่กำหนด
+    // Product.deleteOne({ _id: 'ข้อมูล id ที่ต้องการลบ' })
+    //     .then(result => {
+    //         console.log('Deleted product:', result);
+    //         res.render("manage")
+    //     })
+    //     .catch(err => console.error('Error deleting product', err));
+})
 
 router.get("/product/:id", (req, res) => {
     let productID = req.params.id
