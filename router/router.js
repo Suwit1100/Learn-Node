@@ -3,6 +3,7 @@ const path = require("path")
 const router = express.Router()
 const Product = require('../models/product');
 const multer = require('multer');
+const { log } = require("console");
 
 
 const indexpage = path.join(__dirname, "../templates/index.html")
@@ -20,19 +21,55 @@ router.get("/home", (req, res) => {
 
 router.get("/manage", (req, res) => {
     // ดึงข้อมูลทั้งหมดจาก MongoDB
-    const data = Product.find()
-    res.render("manage", {
-        product: data
-    })
-})
+    Product.find()
+        .then(products => {
+            console.log("All products:", products);
+            res.render("manage", {
+                product: products
+            });
+        })
+        .catch(err => {
+            console.error("Error fetching products", err);
+            res.status(500).send("Error fetching products");
+        });
+});
 
 router.get("/product", (req, res) => {
     res.render("product")
 })
 
-router.get("/edit_product", (req, res) => {
-    res.render("editproduct")
+router.post("/edit_product", (req, res) => {
+    const id = req.body.edit_id;
+    console.log(id);
+    Product.findOne({ _id: id })
+        .then(doc => {
+            console.log(doc);
+            res.render('editproduct', { product: doc });
+        })
+        .catch(err => {
+            console.error(err);
+        });
+
 })
+
+router.post('/update_product', (req, res) => {
+    const update_id = req.body.update_id;
+    let data = {
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description
+    };
+
+    // อัพเดตข้อมูล
+    Product.findByIdAndUpdate(update_id, data, { useFindAndModify: false })
+        .then(() => {
+            res.redirect('/manage');
+        })
+        .catch(err => {
+            console.error(err);
+            // ทำการจัดการข้อผิดพลาดตามที่ต้องการ
+        });
+});
 
 
 
@@ -47,28 +84,19 @@ router.post("/add_product", (req, res) => {
     res.redirect("manage")
 });
 
-router.post("/delete_product", (req, res) => {
-    // // ลบข้อมูลตามเงื่อนไขที่กำหนด
-    // Product.deleteOne({ _id: 'ข้อมูล id ที่ต้องการลบ' })
-    //     .then(result => {
-    //         console.log('Deleted product:', result);
-    //         res.render("manage")
-    //     })
-    //     .catch(err => console.error('Error deleting product', err));
-})
+router.get("/delete_product/:id", (req, res) => {
+    const id = req.params.id;
+    Product.deleteOne({ _id: id })
+        .then(result => {
+            console.log('Deleted product:', result);
+            res.redirect("/manage");
+        })
+        .catch(err => {
+            console.error('Error deleting product', err);
+            res.status(500).send("Error deleting product");
+        });
+});
 
-router.get("/product/:id", (req, res) => {
-    let productID = req.params.id
-    if (productID === "1") {
-        res.sendFile(product1page)
-    } else if (productID === "2") {
-        res.sendFile(product2page)
-    } else if (productID === "3") {
-        res.sendFile(product3page)
-    } else {
-        res.redirect("/")
-    }
-})
 
 module.exports = router
 

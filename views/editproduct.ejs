@@ -12,23 +12,24 @@
 <body>
     <div class="container">
         <%- include('nav') %>
-            <div class="row mt-5">
+            <form method="post" action="/update_product" class="row mt-5">
                 <div class="col-12 text-center">
                     <img src="" alt="" width="300" height="300">
                 </div>
                 <div class="col-6 my-2">
-                    <input type="text" name="update_name" value="สินค้า" class="form-control">
+                    <input type="hidden" name="update_id" value="<%-product.id%>">
+                    <input type="text" name="name" class="form-control" value="<%-product.name%>">
                 </div>
                 <div class="col-6 my-2">
-                    <input type="text" name="update_price" value="ราคา" class="form-control">
+                    <input type="text" name="price" class="form-control" value="<%-product.price%>">
                 </div>
                 <div class="col-12 my-2">
-                    <input type="text" name="update_descreiption" value="รายละเอียด" class="form-control">
+                    <input type="text" name="description" class="form-control" value="<%-product.description%>">
                 </div>
                 <div class="col-12 my-2">
                     <input type="submit" class="form-control btn btn-success" value="อัปเดต">
                 </div>
-            </div>
+            </form>
     </div>
 </body>
 
