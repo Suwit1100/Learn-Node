@@ -22,6 +22,14 @@ router.get("/manage", (req, res) => {
     res.render("manage")
 })
 
+router.get("/product", (req, res) => {
+    res.render("product")
+})
+
+router.get("/edit_product", (req, res) => {
+    res.render("editproduct")
+})
+
 router.get("/product/:id", (req, res) => {
     let productID = req.params.id
     if (productID === "1") {

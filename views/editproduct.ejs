@@ -10,20 +10,23 @@
 </head>
 
 <body>
-    <div class="conatainer">
+    <div class="container">
         <%- include('nav') %>
             <div class="row mt-5">
-                <div class="col-12">
+                <div class="col-12 text-center">
                     <img src="" alt="" width="300" height="300">
                 </div>
                 <div class="col-6 my-2">
-                    <input type="text" name="update_name" value="สินค้า">
+                    <input type="text" name="update_name" value="สินค้า" class="form-control">
                 </div>
                 <div class="col-6 my-2">
-                    <input type="text" name="update_price" value="ราคา">
+                    <input type="text" name="update_price" value="ราคา" class="form-control">
                 </div>
-                <div class="col-6 my-2">
-                    <input type="text" name="update_descreiption" value="รายละเอียด">
+                <div class="col-12 my-2">
+                    <input type="text" name="update_descreiption" value="รายละเอียด" class="form-control">
+                </div>
+                <div class="col-12 my-2">
+                    <input type="submit" class="form-control btn btn-success" value="อัปเดต">
                 </div>
             </div>
     </div>
